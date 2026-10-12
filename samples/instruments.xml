@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio batchId="BATCH-2026-Q4-001" source="SANTIAGO_EXCHANGE_FEED">
+    <instrument type="BOND">
+        <isin>CL0002456781</isin>
+        <ticker>BCU-10Y</ticker>
+        <issuer>Banco Central de Chile</issuer>
+        <quantity>50</quantity>
+        <marketPrice>102.50</marketPrice>
+        <nominalValue>1000.00</nominalValue>
+        <couponRate>0.0450</couponRate>
+        <maturityYears>10</maturityYears>
+    </instrument>
+    <instrument type="BOND">
+        <isin>US912828ZG88</isin>
+        <ticker>US-T10Y</ticker>
+        <issuer>US Department of Treasury</issuer>
+        <quantity>100</quantity>
+        <marketPrice>98.20</marketPrice>
+        <nominalValue>1000.00</nominalValue>
+        <couponRate>0.0425</couponRate>
+        <maturityYears>5</maturityYears>
+    </instrument>
+    <instrument type="EQUITY">
+        <isin>CL0000000105</isin>
+        <ticker>CHILE</ticker>
+        <issuer>Banco de Chile</issuer>
+        <quantity>12000</quantity>
+        <marketPrice>115.40</marketPrice>
+        <dividendYield>0.0820</dividendYield>
+    </instrument>
+    <instrument type="EQUITY">
+        <isin>CL0001856728</isin>
+        <ticker>SQM-B</ticker>
+        <issuer>Sociedad Quimica y Minera de Chile</issuer>
+        <quantity>350</quantity>
+        <marketPrice>42500.00</marketPrice>
+        <dividendYield>0.0550</dividendYield>
+    </instrument>
+</portfolio>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fintech Valuation & Risk Platform | Juan Covili</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 500: '#0F766E', 600: '#0D9488', 700: '#115E59' },
+                        slate: { 850: '#141E33', 900: '#0F172A', 950: '#080D1A' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Top Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-lg bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400 font-bold">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+                <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-2">
+                    Fintech Core Engine <span class="text-xs font-semibold px-2 py-0.5 rounded bg-teal-900/60 text-teal-300 border border-teal-700/50">Java 8+ / REST / XML</span>
+                </h1>
+                <p class="text-xs text-slate-400">Plataforma Front-to-Back de Valoración de Instrumentos y Riesgo</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="https://github.com/juanCovili/fintech-instrument-service" target="_blank" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-lg border border-slate-700 flex items-center gap-2 transition">
+                <i class="fa-brands fa-github text-sm"></i> Ver Código en GitHub
+            </a>
+            <a href="https://juancovili.com" target="_blank" class="text-xs text-teal-400 hover:text-teal-300 font-medium">
+                juancovili.com <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+
+        <!-- Architecture Banner -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg">
+                    <i class="fa-brands fa-java"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Arquitectura</div>
+                    <div class="text-sm font-bold text-white">Java 8+ & Gradle</div>
+                    <div class="text-[11px] text-slate-500">Patrones Strategy & Factory</div>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-file-code"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Integración</div>
+                    <div class="text-sm font-bold text-white">Parser XML / JSON</div>
+                    <div class="text-[11px] text-slate-500">W3C DOM DocumentBuilder</div>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Persistencia</div>
+                    <div class="text-sm font-bold text-white">SQL Relacional</div>
+                    <div class="text-[11px] text-slate-500">PostgreSQL / DAO Pattern</div>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Servicios Web</div>
+                    <div class="text-sm font-bold text-white">RESTful Endpoints</div>
+                    <div class="text-[11px] text-slate-500">HTTP REST + Docker Container</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Valuation Engine Demo -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Left: Table & Valuation -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                        <div>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-table-cells text-teal-400"></i> Cartera de Instrumentos Financieros
+                            </h2>
+                            <p class="text-xs text-slate-400">Valoración Mark-to-Market y Fair Value mediante Strategy Pattern</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <label class="text-xs text-slate-400">Tasa de Descuento:</label>
+                            <div class="flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-700">
+                                <input type="number" id="discountRate" value="5.0" step="0.5" min="0" max="25" class="w-12 bg-transparent text-xs text-teal-400 font-bold focus:outline-none text-right">
+                                <span class="text-xs text-slate-400">%</span>
+                            </div>
+                            <button onclick="recalculate()" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-semibold px-3 py-1.5 rounded-lg transition shadow-sm">
+                                Recalcular
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Instruments Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="text-slate-400 bg-slate-950/50 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                                <tr>
+                                    <th class="py-2.5 px-3">ISIN / Ticker</th>
+                                    <th class="py-2.5 px-3">Emisor</th>
+                                    <th class="py-2.5 px-3">Tipo</th>
+                                    <th class="py-2.5 px-3 text-right">Cantidad</th>
+                                    <th class="py-2.5 px-3 text-right">Precio Mdo.</th>
+                                    <th class="py-2.5 px-3 text-right">Fair Value (Total)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="instrumentsBody" class="divide-y divide-slate-800 text-slate-300">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Summary Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-800">
+                        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800">
+                            <div class="text-[11px] text-slate-400">Total Book Value</div>
+                            <div id="statBookValue" class="text-sm font-bold text-white">$0.00</div>
+                        </div>
+                        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800">
+                            <div class="text-[11px] text-slate-400">Total Fair Value (Valuado)</div>
+                            <div id="statFairValue" class="text-sm font-bold text-teal-400">$0.00</div>
+                        </div>
+                        <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800 col-span-2 sm:col-span-1">
+                            <div class="text-[11px] text-slate-400">Instrumentos Activos</div>
+                            <div id="statCount" class="text-sm font-bold text-white">4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL Architecture Box -->
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code text-teal-400"></i> Modelo Relacional SQL & Consultas de Riesgo
+                    </h3>
+                    <p class="text-xs text-slate-400">Estructura normalizada en 3FN con cálculo de exposición y concentración de riesgo:</p>
+                    <pre class="bg-slate-950 p-3 rounded-lg text-[11px] font-mono text-slate-300 overflow-x-auto border border-slate-800"><code>-- Consulta de Exposición por Emisor (Risk Concentration)
+SELECT fi.issuer_name, fi.instrument_type,
+       SUM(pos.quantity * mp.price) AS total_exposure_value,
+       ROUND(SUM(pos.quantity * mp.price) * 100.0 / 
+       (SELECT SUM(p2.quantity * m2.price) FROM portfolio_positions p2 JOIN market_prices m2 ON p2.instrument_isin = m2.instrument_isin), 2) AS exposure_pct
+FROM portfolio_positions pos
+JOIN financial_instruments fi ON pos.instrument_isin = fi.isin
+JOIN market_prices mp ON fi.isin = mp.instrument_isin
+GROUP BY fi.issuer_name, fi.instrument_type
+ORDER BY total_exposure_value DESC;</code></pre>
+                </div>
+            </div>
+
+            <!-- Right: XML Import & Feed Simulator -->
+            <div class="space-y-6">
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-file-import text-teal-400"></i> Feed XML de Entrada (Batch)
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Estructura procesada por el parser Java (`XmlInstrumentParser.java`):</p>
+                    </div>
+
+                    <textarea id="xmlPayload" rows="12" class="w-full bg-slate-950 p-3 rounded-lg text-[11px] font-mono text-teal-300 border border-slate-800 focus:outline-none focus:border-teal-500"><portfolio batchId="BATCH-2026-Q4-001">
+    <instrument type="BOND">
+        <isin>CL0002456781</isin>
+        <ticker>BCU-10Y</ticker>
+        <issuer>Banco Central de Chile</issuer>
+        <quantity>50</quantity>
+        <marketPrice>102.50</marketPrice>
+        <nominalValue>1000.00</nominalValue>
+        <couponRate>0.0450</couponRate>
+        <maturityYears>10</maturityYears>
+    </instrument>
+    <instrument type="BOND">
+        <isin>US912828ZG88</isin>
+        <ticker>US-T10Y</ticker>
+        <issuer>US Dept of Treasury</issuer>
+        <quantity>100</quantity>
+        <marketPrice>98.20</marketPrice>
+        <nominalValue>1000.00</nominalValue>
+        <couponRate>0.0425</couponRate>
+        <maturityYears>5</maturityYears>
+    </instrument>
+    <instrument type="EQUITY">
+        <isin>CL0000000105</isin>
+        <ticker>CHILE</ticker>
+        <issuer>Banco de Chile</issuer>
+        <quantity>12000</quantity>
+        <marketPrice>115.40</marketPrice>
+        <dividendYield>0.0820</dividendYield>
+    </instrument>
+    <instrument type="EQUITY">
+        <isin>CL0001856728</isin>
+        <ticker>SQM-B</ticker>
+        <issuer>SQM S.A.</issuer>
+        <quantity>350</quantity>
+        <marketPrice>42500.00</marketPrice>
+        <dividendYield>0.0550</dividendYield>
+    </instrument>
+</portfolio></textarea>
+
+                    <button onclick="parseAndLoadXml()" class="w-full bg-slate-800 hover:bg-slate-700 text-teal-400 border border-teal-500/30 font-semibold py-2 rounded-lg text-xs transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Simular Ingesta y Parseo XML
+                    </button>
+                    <div id="parseNotice" class="text-[11px] text-emerald-400 hidden text-center">
+                        ✓ XML parseado correctamente y cartera sincronizada
+                    </div>
+                </div>
+
+                <!-- Design Patterns Breakdown -->
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-teal-400"></i> Patrones de Diseño Implementados
+                    </h3>
+                    <ul class="text-xs space-y-2 text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-400 font-bold">•</span>
+                            <span><b>Strategy:</b> Desacopla algoritmos de descuento de flujos para bonos vs mark-to-market de acciones.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-400 font-bold">•</span>
+                            <span><b>Factory:</b> Centraliza la creación y validación de tipos de instrumentos.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-400 font-bold">•</span>
+                            <span><b>DAO / Repository:</b> Aísla la capa de negocio de las operaciones de base de datos relacional.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-900/60 px-6 py-4 text-center text-xs text-slate-500">
+        Proyecto desarrollado por <span class="text-slate-300 font-semibold">Juan Andrés Covili Cabezas</span> · Ingeniero en Informática (INACAP) · <a href="https://juancovili.com" class="text-teal-400 hover:underline">juancovili.com</a>
+    </footer>
+
+    <script>
+        let currentInstruments = [
+            { isin: "CL0002456781", ticker: "BCU-10Y", issuer: "Banco Central de Chile", type: "BOND", qty: 50, price: 102.50, nominal: 1000.0, coupon: 0.045, years: 10 },
+            { isin: "US912828ZG88", ticker: "US-T10Y", issuer: "US Dept of Treasury", type: "BOND", qty: 100, price: 98.20, nominal: 1000.0, coupon: 0.0425, years: 5 },
+            { isin: "CL0000000105", ticker: "CHILE", issuer: "Banco de Chile", type: "EQUITY", qty: 12000, price: 115.40, dividend: 0.082 },
+            { isin: "CL0001856728", ticker: "SQM-B", issuer: "SQM S.A.", type: "EQUITY", qty: 350, price: 42500.00, dividend: 0.055 }
+        ];
+
+        function calculateFairValue(inst, rate) {
+            if (inst.type === "BOND") {
+                const annualCoupon = inst.nominal * inst.coupon;
+                let pvCoupons = 0;
+                for (let t = 1; t <= inst.years; t++) {
+                    pvCoupons += annualCoupon / Math.pow(1 + rate, t);
+                }
+                const pvPrincipal = inst.nominal / Math.pow(1 + rate, inst.years);
+                return (pvCoupons + pvPrincipal) * inst.qty;
+            } else {
+                return inst.qty * inst.price;
+            }
+        }
+
+        function calculateBookValue(inst) {
+            if (inst.type === "BOND") return inst.qty * inst.nominal;
+            return inst.qty * inst.price;
+        }
+
+        function recalculate() {
+            const rate = parseFloat(document.getElementById('discountRate').value) / 100.0;
+            const tbody = document.getElementById('instrumentsBody');
+            tbody.innerHTML = '';
+
+            let totalBook = 0;
+            let totalFair = 0;
+
+            currentInstruments.forEach(inst => {
+                const bookVal = calculateBookValue(inst);
+                const fairVal = calculateFairValue(inst, rate);
+                totalBook += bookVal;
+                totalFair += fairVal;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-950/40 transition";
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3">
+                        <div class="font-bold text-white">${inst.ticker}</div>
+                        <div class="text-[10px] text-slate-500">${inst.isin}</div>
+                    </td>
+                    <td class="py-2.5 px-3 text-slate-300">${inst.issuer}</td>
+                    <td class="py-2.5 px-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${inst.type === 'BOND' ? 'bg-blue-900/60 text-blue-300 border border-blue-700/50' : 'bg-emerald-900/60 text-emerald-300 border border-emerald-700/50'}">
+                            ${inst.type}
+                        </span>
+                    </td>
+                    <td class="py-2.5 px-3 text-right font-mono">${inst.qty.toLocaleString()}</td>
+                    <td class="py-2.5 px-3 text-right font-mono">$${inst.price.toFixed(2)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono font-bold text-teal-400">$${fairVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('statBookValue').textContent = '$' + totalBook.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('statFairValue').textContent = '$' + totalFair.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('statCount').textContent = currentInstruments.length;
+        }
+
+        function parseAndLoadXml() {
+            const xmlStr = document.getElementById('xmlPayload').value;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlStr, "text/xml");
+            const nodes = xmlDoc.getElementsByTagName("instrument");
+
+            let parsed = [];
+            for (let i = 0; i < nodes.length; i++) {
+                const node = nodes[i];
+                const type = node.getAttribute("type");
+                const isin = node.getElementsByTagName("isin")[0]?.textContent || "";
+                const ticker = node.getElementsByTagName("ticker")[0]?.textContent || "";
+                const issuer = node.getElementsByTagName("issuer")[0]?.textContent || "";
+                const qty = parseFloat(node.getElementsByTagName("quantity")[0]?.textContent || "0");
+                const price = parseFloat(node.getElementsByTagName("marketPrice")[0]?.textContent || "0");
+
+                if (type === "BOND") {
+                    parsed.push({
+                        isin, ticker, issuer, type, qty, price,
+                        nominal: parseFloat(node.getElementsByTagName("nominalValue")[0]?.textContent || "1000"),
+                        coupon: parseFloat(node.getElementsByTagName("couponRate")[0]?.textContent || "0.05"),
+                        years: parseInt(node.getElementsByTagName("maturityYears")[0]?.textContent || "10")
+                    });
+                } else {
+                    parsed.push({
+                        isin, ticker, issuer, type, qty, price,
+                        dividend: parseFloat(node.getElementsByTagName("dividendYield")[0]?.textContent || "0.04")
+                    });
+                }
+            }
+
+            if (parsed.length > 0) {
+                currentInstruments = parsed;
+                recalculate();
+                const notice = document.getElementById('parseNotice');
+                notice.classList.remove('hidden');
+                setTimeout(() => notice.classList.add('hidden'), 3500);
+            }
+        }
+
+        window.onload = recalculate;
+    </script>
+</body>
+</html>
