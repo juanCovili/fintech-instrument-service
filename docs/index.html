@@ -98,8 +98,10 @@
         <!-- Interactive Valuation Engine Demo -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            <!-- Left: Table & Valuation -->
+            <!-- Left: Table, Calculator & Valuation -->
             <div class="lg:col-span-2 space-y-6">
+
+                <!-- Portfolio Valuation Table -->
                 <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
                         <div>
@@ -108,14 +110,19 @@
                             </h2>
                             <p class="text-xs text-slate-400">Valoración Mark-to-Market y Fair Value mediante Strategy Pattern</p>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <label class="text-xs text-slate-400">Tasa de Descuento:</label>
-                            <div class="flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-700">
-                                <input type="number" id="discountRate" value="5.0" step="0.5" min="0" max="25" class="w-12 bg-transparent text-xs text-teal-400 font-bold focus:outline-none text-right">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <label class="text-xs text-slate-400">Tasa Descuento:</label>
+                            <div class="flex items-center space-x-1.5 bg-slate-950 px-2.5 py-1.5 rounded-lg border border-slate-700">
+                                <input type="number" id="discountRate" value="5.0" step="0.5" min="0" max="25" oninput="recalculate()" onchange="recalculate()" class="w-14 bg-transparent text-xs text-teal-400 font-bold focus:outline-none text-right">
                                 <span class="text-xs text-slate-400">%</span>
                             </div>
-                            <button onclick="recalculate()" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-semibold px-3 py-1.5 rounded-lg transition shadow-sm">
-                                Recalcular
+                            <div class="flex items-center gap-1">
+                                <button type="button" onclick="setDiscountRate(3.0)" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded border border-slate-700 transition">3%</button>
+                                <button type="button" onclick="setDiscountRate(5.0)" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-teal-400 font-bold px-2 py-1 rounded border border-slate-700 transition">5%</button>
+                                <button type="button" onclick="setDiscountRate(7.5)" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded border border-slate-700 transition">7.5%</button>
+                            </div>
+                            <button onclick="recalculate()" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-semibold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-arrows-rotate text-[10px]"></i> Recalcular
                             </button>
                         </div>
                     </div>
@@ -152,6 +159,114 @@
                         <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800 col-span-2 sm:col-span-1">
                             <div class="text-[11px] text-slate-400">Instrumentos Activos</div>
                             <div id="statCount" class="text-sm font-bold text-white">4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Bond & Risk Sensitivities Simulator -->
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-lg">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                        <div>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-calculator text-teal-400"></i> Simulador de Bonos & Sensibilidades de Riesgo
+                            </h2>
+                            <p class="text-xs text-slate-400">Fair Value, Duración de Macaulay, Duración Modificada y DV01 (PVBP) en tiempo real</p>
+                        </div>
+                        <span id="bondParBadge" class="self-start sm:self-auto px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-900/60 text-blue-300 border border-blue-700/50">
+                            A la Par (100.00%)
+                        </span>
+                    </div>
+
+                    <!-- Sliders & Inputs -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <!-- Nominal -->
+                        <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800/80 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400">Nominal ($ / UF)</span>
+                                <span id="bondNominalLabel" class="font-mono font-bold text-white">$1,000</span>
+                            </div>
+                            <input type="range" id="bondNominal" min="100" max="10000" step="100" value="1000" oninput="updateBondCalc()" class="w-full accent-teal-500 cursor-pointer">
+                        </div>
+
+                        <!-- Coupon Rate -->
+                        <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800/80 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400">Tasa Cupón Anual</span>
+                                <span id="bondCouponLabel" class="font-mono font-bold text-teal-400">5.00%</span>
+                            </div>
+                            <input type="range" id="bondCoupon" min="0" max="15" step="0.25" value="5.00" oninput="updateBondCalc()" class="w-full accent-teal-500 cursor-pointer">
+                        </div>
+
+                        <!-- Yield / TIR -->
+                        <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800/80 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400">TIR / Descuento (y)</span>
+                                <span id="bondYieldLabel" class="font-mono font-bold text-amber-400">5.00%</span>
+                            </div>
+                            <input type="range" id="bondYield" min="0.5" max="20" step="0.25" value="5.00" oninput="updateBondCalc()" class="w-full accent-amber-500 cursor-pointer">
+                        </div>
+
+                        <!-- Maturity Years -->
+                        <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800/80 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400">Plazo al Vcto.</span>
+                                <span id="bondYearsLabel" class="font-mono font-bold text-white">5 Años</span>
+                            </div>
+                            <input type="range" id="bondYears" min="1" max="30" step="1" value="5" oninput="updateBondCalc()" class="w-full accent-teal-500 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Freq & Presets -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-400">Frecuencia Cupón:</span>
+                            <select id="bondFreq" onchange="updateBondCalc()" class="bg-slate-950 border border-slate-700 text-teal-300 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-teal-500">
+                                <option value="1">Anual (1 pago/año)</option>
+                                <option value="2" selected>Semestral (2 pagos/año)</option>
+                                <option value="4">Trimestral (4 pagos/año)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-slate-400">
+                            <span>Escenarios TIR:</span>
+                            <button type="button" onclick="setBondYieldPreset(3.5)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded border border-slate-700 text-[11px] transition">3.5% (Sobre Par)</button>
+                            <button type="button" onclick="setBondYieldPreset(5.0)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded border border-slate-700 text-[11px] transition">5.0% (Par)</button>
+                            <button type="button" onclick="setBondYieldPreset(7.5)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded border border-slate-700 text-[11px] transition">7.5% (Bajo Par)</button>
+                        </div>
+                    </div>
+
+                    <!-- Results Metrics -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] text-slate-400 uppercase font-semibold">Precio / Fair Value</div>
+                            <div id="resBondPrice" class="text-lg font-bold text-teal-400 font-mono mt-1">$1,000.00</div>
+                            <div id="resBondPricePct" class="text-[10px] text-slate-500 mt-0.5">100.00% del nominal</div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] text-slate-400 uppercase font-semibold flex items-center justify-between">
+                                <span>Duración Macaulay</span>
+                                <i class="fa-solid fa-clock text-[10px] text-slate-500" title="Plazo medio ponderado de flujos"></i>
+                            </div>
+                            <div id="resMacaulay" class="text-lg font-bold text-white font-mono mt-1">4.38 años</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5">Retorno de flujos</div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] text-slate-400 uppercase font-semibold flex items-center justify-between">
+                                <span>Duración Modificada</span>
+                                <i class="fa-solid fa-chart-line text-[10px] text-slate-500" title="Sensibilidad porcentual ante 100 bps"></i>
+                            </div>
+                            <div id="resModifiedDur" class="text-lg font-bold text-emerald-400 font-mono mt-1">4.28%</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5">Sensibilidad ante 100 bps</div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] text-slate-400 uppercase font-semibold flex items-center justify-between">
+                                <span>DV01 (PVBP)</span>
+                                <i class="fa-solid fa-dollar-sign text-[10px] text-slate-500" title="Riesgo monetario por 1 bp (0.01%)"></i>
+                            </div>
+                            <div id="resDV01" class="text-lg font-bold text-purple-400 font-mono mt-1">$0.428</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5">Riesgo por 1 pb (0.01%)</div>
                         </div>
                     </div>
                 </div>
@@ -232,6 +347,25 @@ ORDER BY total_exposure_value DESC;</code></pre>
                     </div>
                 </div>
 
+                <!-- Financial Risk Formulas Reference -->
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable text-teal-400"></i> Métricas Financieras & Riesgo
+                    </h3>
+                    <div class="space-y-2 text-xs text-slate-300">
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+                            <div class="text-teal-400 font-semibold text-[11px]">Duración Modificada (D_mod):</div>
+                            <p class="text-[11px] text-slate-300 mt-0.5 font-mono">D_mod = D_mac / (1 + y/m)</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Sensibilidad porcentual del precio ante un desplazamiento de 100 bps en la curva de tasas.</p>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+                            <div class="text-purple-400 font-semibold text-[11px]">DV01 / PVBP (Dollar Value of 01):</div>
+                            <p class="text-[11px] text-slate-300 mt-0.5 font-mono">DV01 = D_mod × Precio × 0.0001</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Impacto monetario neto en el valor de la cartera por cada 1 punto básico (0.01%) de movimiento en las tasas.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Design Patterns Breakdown -->
                 <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
@@ -288,8 +422,14 @@ ORDER BY total_exposure_value DESC;</code></pre>
             return inst.qty * inst.price;
         }
 
+        function setDiscountRate(val) {
+            document.getElementById('discountRate').value = val.toFixed(1);
+            recalculate();
+        }
+
         function recalculate() {
-            const rate = parseFloat(document.getElementById('discountRate').value) / 100.0;
+            const rawVal = document.getElementById('discountRate').value;
+            const rate = (parseFloat(rawVal) || 0) / 100.0;
             const tbody = document.getElementById('instrumentsBody');
             tbody.innerHTML = '';
 
@@ -325,6 +465,71 @@ ORDER BY total_exposure_value DESC;</code></pre>
             document.getElementById('statBookValue').textContent = '$' + totalBook.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('statFairValue').textContent = '$' + totalFair.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('statCount').textContent = currentInstruments.length;
+        }
+
+        function setBondYieldPreset(val) {
+            document.getElementById('bondYield').value = val;
+            updateBondCalc();
+        }
+
+        function updateBondCalc() {
+            const nominal = parseFloat(document.getElementById('bondNominal').value) || 1000;
+            const couponRate = (parseFloat(document.getElementById('bondCoupon').value) || 5.0) / 100.0;
+            const yieldRate = (parseFloat(document.getElementById('bondYield').value) || 5.0) / 100.0;
+            const years = parseInt(document.getElementById('bondYears').value) || 5;
+            const freq = parseInt(document.getElementById('bondFreq').value) || 2;
+
+            // Labels update
+            document.getElementById('bondNominalLabel').textContent = '$' + nominal.toLocaleString('en-US');
+            document.getElementById('bondCouponLabel').textContent = (couponRate * 100).toFixed(2) + '%';
+            document.getElementById('bondYieldLabel').textContent = (yieldRate * 100).toFixed(2) + '%';
+            document.getElementById('bondYearsLabel').textContent = years + (years === 1 ? ' Año' : ' Años');
+
+            // Calculation with frequency m
+            const periods = years * freq;
+            const couponPerPeriod = (nominal * couponRate) / freq;
+            const yieldPerPeriod = yieldRate / freq;
+
+            let pvCoupons = 0;
+            let weightedTimeSum = 0;
+
+            for (let t = 1; t <= periods; t++) {
+                const discountFactor = Math.pow(1 + yieldPerPeriod, -t);
+                const pvCoupon = couponPerPeriod * discountFactor;
+                pvCoupons += pvCoupon;
+                weightedTimeSum += (t / freq) * pvCoupon;
+            }
+
+            const pvPrincipal = nominal * Math.pow(1 + yieldPerPeriod, -periods);
+            weightedTimeSum += years * pvPrincipal;
+
+            const fairPrice = pvCoupons + pvPrincipal;
+            const macaulayDuration = fairPrice > 0 ? (weightedTimeSum / fairPrice) : 0;
+            const modifiedDuration = (1 + yieldPerPeriod) > 0 ? (macaulayDuration / (1 + yieldPerPeriod)) : 0;
+            const dv01 = fairPrice * modifiedDuration * 0.0001;
+
+            // Display results
+            document.getElementById('resBondPrice').textContent = '$' + fairPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const pricePct = (fairPrice / nominal) * 100.0;
+            document.getElementById('resBondPricePct').textContent = pricePct.toFixed(2) + '% del nominal';
+
+            document.getElementById('resMacaulay').textContent = macaulayDuration.toFixed(2) + ' años';
+            document.getElementById('resModifiedDur').textContent = (modifiedDuration * 100).toFixed(2) + '% / 100 bps';
+            document.getElementById('resDV01').textContent = '$' + dv01.toFixed(3);
+
+            // Badge status
+            const badge = document.getElementById('bondParBadge');
+            const diff = pricePct - 100.0;
+            if (Math.abs(diff) < 0.05) {
+                badge.className = "self-start sm:self-auto px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-900/60 text-blue-300 border border-blue-700/50";
+                badge.textContent = "A la Par (100.00%)";
+            } else if (diff > 0) {
+                badge.className = "self-start sm:self-auto px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-900/60 text-emerald-300 border border-emerald-700/50";
+                badge.textContent = `Sobre la Par / Prima (+${diff.toFixed(2)}%)`;
+            } else {
+                badge.className = "self-start sm:self-auto px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-900/60 text-amber-300 border border-amber-700/50";
+                badge.textContent = `Bajo la Par / Descuento (${diff.toFixed(2)}%)`;
+            }
         }
 
         function parseAndLoadXml() {
@@ -367,7 +572,10 @@ ORDER BY total_exposure_value DESC;</code></pre>
             }
         }
 
-        window.onload = recalculate;
+        window.onload = function() {
+            recalculate();
+            updateBondCalc();
+        };
     </script>
 </body>
 </html>
