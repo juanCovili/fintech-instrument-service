@@ -1,3 +1,8 @@
+// @project   Fintech Core Instruments & Risk Valuation Service
+// @author    Juan Covili <https://github.com/juanCovili>
+// @portfolio https://juancovili.com
+// @copyright Copyright (c) 2026 Juan Covili. Todos los derechos reservados.
+
 plugins {
     id 'java'
     id 'application'

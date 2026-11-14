@@ -1,3 +1,10 @@
+/**
+ * @project   Fintech Core Instruments & Risk Valuation Service
+ * @author    Juan Covili <https://github.com/juanCovili>
+ * @repo      https://github.com/juanCovili/fintech-instrument-service
+ * @portfolio https://juancovili.com
+ * @copyright Copyright (c) 2026 Juan Covili. Todos los derechos reservados.
+ */
 package com.juancovili.fintech;
 
 import com.juancovili.fintech.controller.InstrumentRestHandler;
@@ -9,6 +16,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
 
 public class Main {
+    public static final String AUTHOR_WATERMARK = "Juan Covili (https://github.com/juanCovili)";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws Exception {

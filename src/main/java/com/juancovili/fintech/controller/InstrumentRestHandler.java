@@ -1,3 +1,10 @@
+/**
+ * @project   Fintech Core Instruments & Risk Valuation Service
+ * @author    Juan Covili <https://github.com/juanCovili>
+ * @repo      https://github.com/juanCovili/fintech-instrument-service
+ * @portfolio https://juancovili.com
+ * @copyright Copyright (c) 2026 Juan Covili. Todos los derechos reservados.
+ */
 package com.juancovili.fintech.controller;
 
 import com.juancovili.fintech.model.BondInstrument;
@@ -24,6 +31,7 @@ import java.util.stream.Collectors;
  */
 public class InstrumentRestHandler implements HttpHandler {
 
+    public static final String AUTHOR_WATERMARK = "Juan Covili (https://github.com/juanCovili)";
     private final InstrumentRepository repository = InstrumentRepository.getInstance();
     private final ValuationStrategy bondStrategy = new BondValuationStrategy();
     private final ValuationStrategy equityStrategy = new EquityValuationStrategy();
@@ -37,6 +45,7 @@ public class InstrumentRestHandler implements HttpHandler {
         exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+        exchange.getResponseHeaders().set("X-Author", AUTHOR_WATERMARK);
 
         if ("OPTIONS".equalsIgnoreCase(method)) {
             exchange.sendResponseHeaders(204, -1);
